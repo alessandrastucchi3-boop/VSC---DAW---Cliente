@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Mi primera pagina web</title>
+	<style>
+		body {
+			background-color: #ffffff;
+			color: #333333;
+			font-family: Arial, sans-serif;
+			transition: background 0.3s, color 0.3s;
+		}
+		body.dark {
+			background-color: #1a1a1a;
+			color: #f0f0f0;
+		}
+		button {
+			padding: 10px 20px;
+			cursor: pointer;
+			margin-top: 20px;
+		}
+	</style>
+</head>
+
+<body>
+	<h1>Prueba</h1>
+	<p>Esta es una prueba</p>
+	<button id="btnTema">Cambiar Tema</button>
+	<script>
+		function obtenerCookie(nombre) {
+			const cookies = document.cookie.split("; ");
+			for (let cookie of cookies) {
+				const [clave, valor] = cookie.split("=");
+				if (clave === nombre) return valor;
+			}
+			return null;
+		}
+		if (obtenerCookie("tema") === "oscuro") {
+			document.body.classList.add("dark");
+		}
+		const boton = document.getElementById("btnTema");
+		const body = document.body;
+		boton.addEventListener("click", () => {
+			body.classList.toggle("dark");
+		const esOscuro = body.classList.contains("dark");
+		const valorTema = esOscuro ? "oscuro" : "claro";
+		const segundosSieteDias = 7 * 24 * 60 * 60;
+		document.cookie = `tema=${valorTema}; max-age=${segundosSieteDias}; path=/`;
+		});
+	</script>
+</body>
+</html>
