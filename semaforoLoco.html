@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<title>El semaforo loco</title>
+	<style>
+	#semaforo {
+	border-radius: 50%;
+	border: none;
+	width: 60px;
+	height: 60px;
+	cursor: pointer;
+	}
+	.red {
+	background-color: red;
+	box-shadow: 0 0 15px red, 0 0 25px red, 0 0 40px red;
+	}
+	.yellow {
+	background-color: yellow;
+	box-shadow: 0 0 15px yellow, 0 0 25px yellow, 0 0 40px yellow;
+	}
+	.green {
+	background-color: green;
+	box-shadow: 0 0 15px green, 0 0 25px green, 0 0 40px green;
+	}
+	</style>
+</head>
+
+<body>
+	<h1 style="color:red;">El Semaforo Loco</h1>
+	<button id="semaforo" class="red"></button>
+	<script>
+	const semaforo = document.getElementById("semaforo");
+	semaforo.addEventListener("click", () => {
+	if(semaforo.classList.contains("red")) {
+	semaforo.classList.remove("red");
+	semaforo.classList.add("yellow");
+	} else if(semaforo.classList.contains("yellow")) {
+	semaforo.classList.remove("yellow");
+	semaforo.classList.add("green");
+	} else {
+	semaforo.classList.remove("green");
+	semaforo.classList.add("red");
+	}
+	});
+	</script>
+</body>
+</html>
