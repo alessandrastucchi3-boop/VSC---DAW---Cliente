@@ -1,0 +1,73 @@
+<--! El panel de estadísticas académicas -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Estadísticas Académicas</title>
+    <style>
+        .suspenso { color: red; font-weight: bold; }
+        .aprobado { color: green; }
+    </style>
+</head>
+<body>
+
+    <h1 id="tituloAlumno">Panel del Estudiante</h1>
+    <p id="fechaActual"></p>
+    <p id="textoMedia"></p>
+    
+    <h3>Calificaciones obtenidas:</h3>
+    <ul id="listaNotas"></ul>
+
+    <button id="btnGenerar">Generar Informe</button>
+
+    <script>
+        const boton = document.getElementById("btnGenerar");
+
+        boton.addEventListener("click", () => {
+            // 1. Pide el nombre, haz un trim() y pásalo a mayúsculas
+            const nombre = prompt("Hola, cual es tu nombre?", "estudiante");
+	    let nombreLimpio;
+	    if (nombre != null && nombre != "") {
+	    	nombreLimpio = nombre.trim().toUpperCase();
+	    } else {
+		nombreLimpio = "ESTUDIANTE";
+	    }
+            // 2. Obtén la fecha actual y muéstrala formateada con Intl.DateTimeFormat
+            const fecha = new Date();
+	    const fechaFormateada = new Intl.DateTimeFormat('es-ES', {				    year: 'numeric',
+	    month: 'long',
+	    day: 'numeric'
+	    }).format(fecha);
+	    const fechaActual = document.getElementById("fechaActual");
+	    fechaActual.textContent = fechaFormateada;
+            // 3. Genera un array con 5 notas aleatorias (0 a 10) usando Math.random y Math.floor
+	    let arrayNotas = [];
+	    for(let i=0; i < 5; i++) {
+	    arrayNotas[i] = Math.floor(Math.random()*11);
+	    }            
+            // 4. Calcula la media con reduce() y filtra las aprobadas con filter()
+            let media = arrayNotas.reduce((acomulador, nota) => acomulador + nota,    0)/arrayNotas.length;
+	    const notasAprobadas = arrayNotas.filter(nota => nota >= 6);
+	    
+            // 5. Muestra los resultados en el DOM creando elementos con createElement y classList
+	    const tituloAlumno = document.getElementById('tituloAlumno');
+	    tituloAlumno.textContent = `Estudiante: ${nombreLimpio}`;
+	    const textoMedia = document.getElementById('textoMedia');
+	    textoMedia.textContent = `La media de las notas es ${media}`;
+	    const listaNotas = document.getElementById('listaNotas');
+	    listaNotas.innerHTML = "";
+	    arrayNotas.forEach(nota => {
+		const itemLi = document.createElement('li');
+		itemLi.textContent = nota;
+		if (nota >= 6) {
+			itemLi.classList.add('aprobado');
+		} else {
+			itemLi.classList.add('suspenso');
+		}
+		listaNotas.appendChild(itemLi);
+		});
+        });
+    </script>
+</body>
+</html>
