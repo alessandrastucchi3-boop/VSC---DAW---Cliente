@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Contador Interactivo</title>
+</head>
+
+<body>
+<h1>Que quieres hacer?</h1>
+<p id="numero" style="font-size:40px;"></p>
+<button id="sumar" style="cursor:pointer;">Sumar</button>
+<button id="restar" style="cursor:pointer;">Restar</button>
+<button id="reset" style="cursor:pointer;">Reset</button>
+<script>
+const numero = document.getElementById("numero");
+let numeroRandom;
+const sumar = document.getElementById("sumar");
+const restar = document.getElementById("restar");
+const reset = document.getElementById("reset");
+numeroRandom = Math.floor(Math.random()*1000);
+numero.textContent = numeroRandom;
+sumar.addEventListener("click", () => {
+numeroRandom = numeroRandom + 1;
+numero.textContent = numeroRandom;
+});
+restar.addEventListener("click", () => {
+numeroRandom = numeroRandom - 1;
+numero.textContent = numeroRandom;
+});
+reset.addEventListener("click", () => {
+numeroRandom = 0;
+numero.textContent = numeroRandom;
+});
+</script>
+</body>
+</html>
